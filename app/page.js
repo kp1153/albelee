@@ -1,103 +1,141 @@
-import Image from "next/image";
+// app/page.jsx
 
-export default function Home() {
+// Next.js App Router में, यह फाइल रूट URL (/) के लिए पेज है।
+
+import Link from 'next/link';
+// यदि आप Hero Section में अपनी इमेज का उपयोग करना चाहते हैं, तो 'next/image' का उपयोग करें
+// import Image from 'next/image'; 
+
+// --- सहायक कंपोनेंट्स ---
+
+// 1. कैटेगरी कार्ड कंपोनेंट
+const CategoryCard = ({ title, description, href, imageAlt }) => (
+  // Link की जगह <a> टैग का इस्तेमाल किया गया है, लेकिन Next.js में Link कंपोनेंट बेहतर है। 
+  // App Router में आप Link कंपोनेंट को यहीं इंपोर्ट कर सकते हैं।
+  <Link href={href} className="block bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transform transition duration-300 hover:scale-[1.02]">
+    
+    {/* इमेज कंटेनर: यहाँ अपनी असली इमेज डालें */}
+    <div className="h-64 bg-gray-200 flex items-center justify-center">
+        {/* Placeholder for Image (Replace with next/image or a regular img tag) */}
+        <p className="text-gray-500 font-semibold">{imageAlt}</p>
+        {/*
+        उदाहरण के लिए, यदि आप Image कंपोनेंट का उपयोग करते हैं:
+        <Image src="/images/kundan-placeholder.jpg" alt={imageAlt} width={500} height={400} className="w-full h-full object-cover" />
+        */}
+    </div>
+    
+    <div className="p-6 text-center">
+      <h3 className="text-xl font-semibold text-gray-900 mb-2">{title}</h3>
+      <p className="text-gray-600">{description}</p>
+      <span className="mt-3 inline-block text-yellow-500 font-medium">अभी ख़रीदें →</span>
+    </div>
+  </Link>
+);
+
+// 2. प्रॉमिज़ बॉक्स कंपोनेंट
+const PromiseBox = ({ icon, text }) => (
+    <div className="w-full sm:w-1/3 p-4">
+        <div className="text-4xl mb-3">{icon}</div>
+        <p className="text-gray-700 font-medium">{text}</p>
+    </div>
+);
+
+// --- मुख्य पेज कंपोनेंट ---
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-gray-50">
+      
+      {/* 1. हीरो सेक्शन (Hero Section) */}
+      <section className="bg-white py-20 md:py-32 border-b-4 border-yellow-400">
+        <div className="container mx-auto px-6 text-center">
+          
+          <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-4">
+            जयपुर की शान, आपकी **पहचान**
+          </h1>
+          
+          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            हमेशा चमकते डिज़ाइन, बेहतरीन कारीगरी। भारत की सर्वश्रेष्ठ नक़ली ज्वैलरी की ऑनलाइन दुकान।
+          </p>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          {/* CTA बटन */}
+          <Link 
+            href="/collections" 
+            className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white text-lg font-semibold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            पूरा संग्रह देखें
+          </Link>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* --- */}
+      
+      {/* 2. मुख्य श्रेणियाँ (Featured Categories Section) */}
+      <section className="py-16">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold text-gray-800 mb-10 text-center">
+            हमारी विशेष श्रेणियां
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* कुंदन ज्वैलरी */}
+            <CategoryCard 
+              title="कुंदन के जादू" 
+              description="शाही और पारंपरिक कुंदन सेट्स।" 
+              href="/collections/kundan"
+              imageAlt="कुंदन ज्वैलरी"
+            />
+
+            {/* ऑक्सीडाइज्ड ज्वैलरी */}
+            <CategoryCard 
+              title="ट्रेंडी ऑक्सीडाइज्ड" 
+              description="बोल्ड और मॉडर्न लुक के लिए।" 
+              href="/collections/oxidised"
+              imageAlt="ऑक्सीडाइज्ड ज्वैलरी"
+            />
+
+            {/* मीनाकारी ज्वैलरी */}
+            <CategoryCard 
+              title="रंगीन मीनाकारी" 
+              description="जयपुर की प्रसिद्ध मीनाकारी कला।" 
+              href="/collections/meenakari"
+              imageAlt="मीनाकारी ज्वैलरी"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* --- */}
+      
+      {/* 3. ब्रांड प्रॉमिज़ (Brand Promise/USP) */}
+      <section className="bg-gray-100 py-16 text-center">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold text-gray-800 mb-10">
+            क्यों हमें चुनें?
+          </h2>
+          <div className="flex flex-wrap justify-center">
+            <PromiseBox icon="✅" text="100% जयपुर कारीगरी" />
+            <PromiseBox icon="🛡️" text="सुरक्षित कैश ऑन डिलीवरी" />
+            <PromiseBox icon="🚀" text="तेज़ भारत-व्यापी शिपिंग" />
+          </div>
+        </div>
+      </section>
+      
+      {/*
+        नोट: फुटर को आमतौर पर app/layout.jsx में जोड़ा जाता है ताकि वह हर पेज पर दिखे। 
+        अगर आप इसे सिर्फ इस पेज पर दिखाना चाहते हैं तो नीचे का कोड इस्तेमाल कर सकते हैं।
+      */}
+      {/* <footer>...</footer> */}
+
     </div>
   );
 }
+
+// Next.js App Router में, आपको <Head> के बजाय metadata को उसी फ़ोल्डर में define करना चाहिए। 
+// app/page.jsx के बगल में एक metadata object बनाकर SEO संभालें।
+/*
+// app/page.js के साथ ही यह कोड (अगर आप JS का उपयोग कर रहे हैं)
+export const metadata = {
+  title: 'जयपुर ज्वैलरी | कुंदन, मीनाकारी और फैशन ज्वैलरी ऑनलाइन खरीदें',
+  description: 'जयपुर की शानदार नक़ली और फैशन ज्वैलरी का बेहतरीन संग्रह। कुंदन, मीनाकारी और ऑक्सीडाइज्ड डिज़ाइन ऑनलाइन खरीदें।',
+}
+*/
