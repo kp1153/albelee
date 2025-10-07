@@ -4,10 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 
 const Navbar = () => {
-  // मोबाइल मेन्यू के खुलने/बंद होने की स्थिति (state)
   const [isOpen, setIsOpen] = useState(false);
 
-  // मेन्यू टॉगल फंक्शन
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -28,16 +26,23 @@ const Navbar = () => {
       <div className="border-b border-gray-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
           {/* ब्रांड लोगो/नाम */}
-          <Link
-            href="/"
-            className="text-3xl font-extrabold text-gray-900 tracking-wider"
-          >
-            <span className="text-yellow-600">अलबेली</span>
+          <Link href="/" className="flex items-center space-x-3">
+            {/* हिंदी अलबेली */}
+            <span className="text-3xl font-extrabold tracking-wider flex space-x-1">
+              <span className="text-pink-600">अ</span>
+              <span className="text-emerald-500">ल</span>
+              <span className="text-yellow-600">बे</span>
+              <span className="text-gray-300">ली</span>
+            </span>
+
+            {/* अंग्रेजी Albeli (रेनबो ग्रेडिएंट) */}
+            <span className="text-2xl font-bold bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+              Albeli
+            </span>
           </Link>
 
-          {/* डेस्कटॉप यूटिलिटी आइकन्स (Search, Cart) */}
+          {/* डेस्कटॉप यूटिलिटी आइकन्स */}
           <div className="flex items-center space-x-6">
-            {/* सर्च आइकॉन प्लेसहोल्डर */}
             <button
               className="text-gray-700 hover:text-yellow-600 hidden sm:block"
               aria-label="Search"
@@ -59,7 +64,6 @@ const Navbar = () => {
               </svg>
             </button>
 
-            {/* कार्ट आइकॉन */}
             <Link
               href="/cart"
               className="text-gray-700 hover:text-yellow-600"
@@ -83,7 +87,6 @@ const Navbar = () => {
               </svg>
             </Link>
 
-            {/* मोबाइल मेन्यू बटन */}
             <button
               onClick={toggleMenu}
               className="md:hidden text-gray-700 hover:text-yellow-600 focus:outline-none"
@@ -125,7 +128,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* पंक्ति 2: मुख्य मेन्यू लिंक्स (केवल डेस्कटॉप पर) */}
+      {/* डेस्कटॉप मेन्यू */}
       <div className="hidden md:block bg-gray-50 border-b border-gray-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center space-x-8 h-10 items-center">
           {navLinks.map((link) => (
@@ -140,7 +143,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* मोबाइल ड्रॉपडाउन मेन्यू (मोबाइल के लिए) */}
+      {/* मोबाइल मेन्यू */}
       {isOpen && (
         <div className="md:hidden px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-50 border-t border-gray-200">
           {navLinks.map((link) => (
