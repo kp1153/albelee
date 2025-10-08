@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,30 +22,44 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50 font-sans">
-      {/* पंक्ति 1: लोगो, सर्च और कार्ट */}
-      <div className="border-b border-gray-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
-          {/* ब्रांड लोगो/नाम */}
-          <Link href="/" className="flex items-center space-x-3">
-            {/* हिंदी अलबेली */}
-            <span className="text-3xl font-extrabold tracking-wider flex space-x-1">
-              <span className="text-pink-600">अ</span>
-              <span className="text-emerald-500">ल</span>
-              <span className="text-yellow-600">बे</span>
-              <span className="text-gray-300">ली</span>
-            </span>
-
-            {/* अंग्रेजी Albeli (रेनबो ग्रेडिएंट) */}
-            <span className="text-2xl font-bold bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-              Albeli
-            </span>
+    <nav className="bg-gradient-to-br from-rose-100 via-purple-100 to-amber-100 shadow-lg sticky top-0 z-50 font-sans">
+      {/* पंक्ति 1: लोगो, नाम (center) और आइकन्स */}
+      <div className="border-b border-purple-200">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+          {/* बायीं तरफ: लोगो */}
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo.jpeg"
+              alt="Albelee Logo"
+              width={55}
+              height={55}
+              className="rounded-lg shadow-md"
+            />
           </Link>
 
-          {/* डेस्कटॉप यूटिलिटी आइकन्स */}
+          {/* बीच में: नाम */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+            <span className="text-3xl font-black tracking-wide flex">
+              <span className="text-pink-600">अ</span>
+              <span className="text-green-700">ल</span>
+              <span className="text-blue-600">बे</span>
+              <span className="text-orange-600">ली</span>
+            </span>
+            <span className="text-2xl font-black flex -mt-1">
+              <span className="text-violet-600">A</span>
+              <span className="text-indigo-600">L</span>
+              <span className="text-blue-600">B</span>
+              <span className="text-green-500">E</span>
+              <span className="text-yellow-500">L</span>
+              <span className="text-orange-500">E</span>
+              <span className="text-red-600">E</span>
+            </span>
+          </div>
+
+          {/* दायीं तरफ: आइकन्स */}
           <div className="flex items-center space-x-6">
             <button
-              className="text-gray-700 hover:text-yellow-600 hidden sm:block"
+              className="text-purple-700 hover:text-pink-600 hover:scale-110 transition-all hidden sm:block"
               aria-label="Search"
             >
               <svg
@@ -66,7 +81,7 @@ const Navbar = () => {
 
             <Link
               href="/cart"
-              className="text-gray-700 hover:text-yellow-600"
+              className="text-purple-700 hover:text-pink-600 hover:scale-110 transition-all"
               aria-label="Shopping Cart"
             >
               <svg
@@ -89,7 +104,7 @@ const Navbar = () => {
 
             <button
               onClick={toggleMenu}
-              className="md:hidden text-gray-700 hover:text-yellow-600 focus:outline-none"
+              className="md:hidden text-purple-700 hover:text-pink-600 focus:outline-none"
               aria-label="Toggle menu"
             >
               {isOpen ? (
@@ -128,14 +143,30 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* डेस्कटॉप मेन्यू */}
-      <div className="hidden md:block bg-gray-50 border-b border-gray-200">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center space-x-8 h-10 items-center">
+      {/* पंक्ति 2: टैगलाइन */}
+      <div className="bg-gradient-to-r from-pink-200 via-purple-200 to-yellow-200 border-b border-purple-200 py-2">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-center text-sm italic font-semibold">
+            <span className="text-pink-700">तू अब निकल, </span>
+            <span className="text-purple-700">चल बदल, </span>
+            <span className="text-blue-600">रोज़ नया रूप धर, </span>
+            <span className="text-green-600">बन सँवर, </span>
+            <span className="text-yellow-700">कर गुज़र </span>
+            <span className="text-orange-600">नित नई अठखेली... </span>
+            <span className="text-red-600">कि जान ले अब हर कोई, </span>
+            <span className="text-violet-700">तू है कोई अलबेली।</span>
+          </p>
+        </div>
+      </div>
+
+      {/* पंक्ति 3: डेस्कटॉप मेन्यू */}
+      <div className="hidden md:block bg-white/70 backdrop-blur-sm border-b border-purple-200">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center space-x-8 h-12 items-center">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="text-gray-700 hover:text-yellow-600 text-sm font-semibold transition duration-150 py-1"
+              className="text-gray-800 hover:text-transparent hover:bg-gradient-to-r hover:from-pink-600 hover:to-purple-600 hover:bg-clip-text text-sm font-bold transition-all duration-300 py-1 hover:scale-105"
             >
               {link.name}
             </Link>
@@ -145,12 +176,12 @@ const Navbar = () => {
 
       {/* मोबाइल मेन्यू */}
       {isOpen && (
-        <div className="md:hidden px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-50 border-t border-gray-200">
+        <div className="md:hidden px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/80 backdrop-blur-sm border-t border-purple-100">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="block text-gray-700 hover:bg-yellow-100 hover:text-yellow-600 px-3 py-2 rounded-md text-base font-medium transition duration-150"
+              className="block text-gray-800 hover:bg-gradient-to-r hover:from-pink-100 hover:to-purple-100 hover:text-purple-700 px-3 py-2 rounded-md text-base font-semibold transition-all duration-300"
               onClick={toggleMenu}
             >
               {link.name}
