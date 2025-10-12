@@ -1,5 +1,6 @@
 import { getAllProducts, urlFor } from "@/lib/sanity";
 import Image from "next/image";
+import AddToCartButton from "@/components/AddToCartButton";
 
 export default async function CollectionsPage() {
   const products = await getAllProducts();

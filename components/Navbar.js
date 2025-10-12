@@ -3,9 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useCart } from "@/context/CartContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { getTotalItems } = useCart();
+  const cartCount = getTotalItems();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -24,7 +27,13 @@ const Navbar = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           {/* Left: Logo */}
           <Link href="/">
-            <Image src="/logo.jpeg" alt="Albelee Logo" width={50} height={50} />
+            <Image
+              src="/logo.jpeg"
+              alt="Albelee Logo"
+              width={50}
+              height={50}
+              style={{ width: "auto", height: "auto" }}
+            />
           </Link>
 
           {/* Center: Title */}
@@ -106,6 +115,13 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
+          <Link
+            href="/cart"
+            className="block text-gray-800 hover:bg-gradient-to-r hover:from-pink-100 hover:to-purple-100 hover:text-purple-700 px-3 py-2 rounded-md text-base font-semibold transition-all duration-300"
+            onClick={toggleMenu}
+          >
+            कार्ट ({cartCount})
+          </Link>
         </div>
       )}
     </nav>

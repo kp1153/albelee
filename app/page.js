@@ -1,5 +1,6 @@
 import { getAllProducts, urlFor } from "@/lib/sanity";
 import Image from "next/image";
+import AddToCartButton from "@/components/AddToCartButton";
 
 export default async function Home() {
   const products = await getAllProducts();
@@ -9,11 +10,12 @@ export default async function Home() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center">
-          <h1 className="text-4xl font-black text-purple-700 mb-4">
-            Featured Products
+          <h1 className="text-4xl font-black bg-gradient-to-r from-red-500 via-yellow-500 to-purple-600 bg-clip-text text-transparent mb-4">
+            फीचर्ड प्रोडक्ट्स
           </h1>
-          <p className="text-gray-600 text-lg">
-            Explore our beautiful collection
+          <p className="text-lg font-medium text-pink-600">
+            तू अब निकल, चल बदल, रोज़ नया रूप धर, बन सँवर, कर गुज़र नित नई
+            अठखेली... कि जान ले अब हर कोई, तू है कोई अलबेली
           </p>
         </div>
       </section>
@@ -67,12 +69,7 @@ export default async function Home() {
                     </span>
                   </div>
 
-                  <button
-                    className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white py-2 rounded-lg font-bold hover:from-pink-600 hover:to-purple-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={product.stock === 0}
-                  >
-                    Add to Cart
-                  </button>
+                  <AddToCartButton product={product} />
                 </div>
               </div>
             ))}
