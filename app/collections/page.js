@@ -1,19 +1,19 @@
 import { getAllProducts, urlFor } from "@/lib/sanity";
 import Image from "next/image";
 
-export default async function Home() {
+export default async function CollectionsPage() {
   const products = await getAllProducts();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 via-purple-50 to-amber-50">
-      {/* Hero Section */}
+      {/* Header Section */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center">
           <h1 className="text-4xl font-black text-purple-700 mb-4">
-            Featured Products
+            Our Collections
           </h1>
           <p className="text-gray-600 text-lg">
-            Explore our beautiful collection
+            Browse all our beautiful jewelry pieces
           </p>
         </div>
       </section>
