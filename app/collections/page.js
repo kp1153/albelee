@@ -1,6 +1,7 @@
 import { getAllProducts, urlFor } from "@/lib/sanity";
 import Image from "next/image";
 import AddToCartButton from "@/components/AddToCartButton";
+import Link from "next/link";
 
 export default async function CollectionsPage() {
   const products = await getAllProducts();
@@ -31,26 +32,30 @@ export default async function CollectionsPage() {
                 className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
               >
                 {/* Product Image */}
-                <div className="relative w-full h-64 bg-gray-200">
-                  {product.image?.asset?.url ? (
-                    <Image
-                      src={urlFor(product.image).width(400).url()}
-                      alt={product.image?.alt || product.name}
-                      fill
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-400">
-                      No image
-                    </div>
-                  )}
-                </div>
+                <Link href={`/products/${product._id}`}>
+                  <div className="relative w-full h-64 bg-gray-200 cursor-pointer">
+                    {product.image?.asset?.url ? (
+                      <Image
+                        src={urlFor(product.image).width(400).url()}
+                        alt={product.image?.alt || product.name}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-gray-400">
+                        No image
+                      </div>
+                    )}
+                  </div>
+                </Link>
 
                 {/* Product Details */}
                 <div className="p-4">
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">
-                    {product.name}
-                  </h3>
+                  <Link href={`/products/${product._id}`}>
+                    <h3 className="text-lg font-bold text-gray-800 mb-2 hover:text-purple-600 cursor-pointer">
+                      {product.name}
+                    </h3>
+                  </Link>
                   <p className="text-gray-600 text-sm mb-3 line-clamp-2">
                     {product.description}
                   </p>
@@ -68,12 +73,7 @@ export default async function CollectionsPage() {
                     </span>
                   </div>
 
-                  <button
-                    className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white py-2 rounded-lg font-bold hover:from-pink-600 hover:to-purple-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={product.stock === 0}
-                  >
-                    Add to Cart
-                  </button>
+                  <AddToCartButton product={product} />
                 </div>
               </div>
             ))}
