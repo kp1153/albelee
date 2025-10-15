@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ["sanity", "@sanity/vision", "sanity-plugin-cloudinary"],
   images: {
     remotePatterns: [
       {
@@ -11,19 +12,6 @@ const nextConfig = {
         hostname: "res.cloudinary.com",
       },
     ],
-  },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.optimization.splitChunks.cacheGroups = {
-        ...config.optimization.splitChunks.cacheGroups,
-        sanity: {
-          test: /[\\/]node_modules[\\/]sanity[\\/]/,
-          name: "sanity",
-          priority: 10,
-        },
-      };
-    }
-    return config;
   },
 };
 
